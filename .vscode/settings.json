@@ -1,0 +1,10 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "array": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "random": "c",
+        "stdio.h": "c"
+    }
+}
