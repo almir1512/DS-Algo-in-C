@@ -1,47 +1,42 @@
-#include<stdio.h>
-#include<stdlib.h>
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+struct node *head ,*tail =NULL;
+
 struct node {
-    int data ;
-    struct node* next;
-    struct node* prev;
-
+  int data;
+  struct node *next;
+  struct node *prev;
 };
-void display(struct node *ptr){
+void display(){  //no need to pass head because it is global
+    struct node *ptr=head;
     while(ptr!=NULL){
-    printf("%d\n",ptr->data);
-    ptr=ptr->next;
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
     }
-
 }
 
-    int main()
-{
-    struct node *head;
-    struct node *second;
-    struct node *third;
-    struct node *fourth;
-    head=(struct node *)malloc(sizeof(struct node));
-    second=(struct node *)malloc(sizeof(struct node));
-    third=(struct node *)malloc(sizeof(struct node));
-    fourth=(struct node *)malloc(sizeof(struct node));
-
-    //link first to second
-    head->prev=NULL;
-    head->data=1;
-    head->next=second;
-    //link second to third 
-    second->prev=head;
-    second->data=2;
-    second->next=third;
-    //link third to fourth
-    third->prev=second;
-    third->data=3;
-    third->next=fourth;
-    //link fourth to null
-    second->prev=third;
-    second->data=4;
-    second->next=NULL;
-
-    display(head);
+void addNode(int data){
+        struct node *newnode =(struct node *)malloc (sizeof(struct node));
+        newnode->data=data;
+    if(head==NULL){
+        head=tail=newnode;
+        head->prev=NULL;
+        tail->next=NULL;
+        
+    }
+    else{
+        tail->next=newnode;
+        newnode->prev=tail;
+        tail=newnode;
+        tail->next=NULL;
+    }
+}
+int main() {
+  addNode(1);
+  addNode(1);addNode(1);addNode(1);addNode(1);addNode(1);addNode(1);addNode(1);
+  display(head);
+  
+    
     return 0;
 }
