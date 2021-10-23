@@ -27,7 +27,7 @@ void addNode(int data){
     }
     else{
         tail->next=newnode;
-        newnode->prev=tail;
+        newnode->prev=tail;  
         tail=newnode;
         tail->next=NULL;
     }
