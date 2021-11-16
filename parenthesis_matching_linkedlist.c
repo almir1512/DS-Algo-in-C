@@ -90,7 +90,7 @@ int isbalanced(char *exp)
     char *exp="1*3)))(4+5)";
     if(isbalanced(exp))
     {
-        printf("Parenthesis balanced");
+        printf("Parenthes is balanced");
     }
     else{
     printf("Parenthesis is not balanced");

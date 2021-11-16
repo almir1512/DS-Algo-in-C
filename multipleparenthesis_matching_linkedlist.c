@@ -4,6 +4,7 @@ struct node {           //creating stack using linked list
     char data;
     struct node *next;
 }; 
+ struct node *top;
 int isEmpty(struct node *top)
 {
     if(top==NULL)
@@ -46,18 +47,18 @@ struct node *ptr=(struct node *)malloc(sizeof(struct node));
     
 }
 
-char pop(struct node **top)  // global variable and local variable cannot be of same name
+char pop(struct node *tp)  // global variable and local variable cannot be of same name
 {
 
 
-    if(isEmpty(*top))
+    if(isEmpty(tp))
     {
         printf("Stack Underflow!");
     }
     else
     {
-        struct node *ptr=*top;
-        *top=(*top)->next;   // first deferencing then taking the value using arrow operators
+        struct node *ptr=tp;
+        top=tp->next;   // first deferencing then taking the value using arrow operators
         int x=ptr->data;
         free(ptr);
 
@@ -82,7 +83,7 @@ int match(char a,char b){
 }
 int isbalanced(char *exp)
 {   char popped_char;
-    struct node *top;
+   
     for(int i=0;exp='\0';i++)
     {
         if(exp[i]=='(' ||exp[i]=='{' || exp[i]=='[')
@@ -112,7 +113,7 @@ int isbalanced(char *exp)
 }
     int main()
 {   
-    char *exp="{1+9}[8+9](2*70)";
+    char *exp="{1+9}[8+9](2*70";
     if(isbalanced(exp))
     {
         printf("Parenthesis is balanced");
