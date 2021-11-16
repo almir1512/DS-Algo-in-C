@@ -1,77 +1,102 @@
 #include<stdio.h>
-struct queue {
-int size;
-int f;
-int r;
-int *arr;
 
-};
-int isFull(struct queue *q)
-{ 
-    if(q->r=(q->r+1)%q->size == q->f){                          //i=i+1%size
-    return 1;
-    }
-    return 0;
-    
-}
-int isEmpty(struct queue *q)
-{ 
-    if(q->f == q->r){
-    return 1;
-    }
-    return 0;
-}
-void enqueue (struct queue *q,int value )
-{
-    if(isFull(q))
-    {
-        printf("Queue is full");
+#define size 5
+int arr [size];
+int front=-1, rear = -1; // always define differently 
 
-    }
-    else{
-        q->r = (q->r +1)%q->size;
-        q->arr[q->r]=value;
-        printf("Enqueued element : %d\n",value);
-    }
-}
-int dequeue (struct queue *q)
-{
-    int value=-1;
-    if(isEmpty(q))
-    {
-        printf("Queue is Empty");
+
+int isF(){
+    if ((front == rear+1 )|| (front==0 && rear==size-1)){
+        return 1;
     }
     else {
-        q->f = (q->f +1)%q->size;
-        value=q->arr[q->f];
-        
+        return 0;
     }
+}
+int isEmpty() {
+  if (front == -1) return 1;
+  return 0;
+}
+void display ( ){
+    int i ;
+    if (isEmpty()){
+        printf ( "Empty Queue ");
+    }
+    else {
+        printf("Front -> %d\n ", front);
+        printf("Queue - > ");
+        for ( i = front; i!=rear ; i=(i+1) % size)
+        {
+            printf(" %d",arr[i]);
+        }
+        printf(" %d\n",arr[i]); // will not print the last element as the loop will end when, i == rear 
+        printf("Rear -> %d\n ", rear);
+
+    }
+}
+
+void enQueue (int element){
+    if (isF()){
+        printf("Queue is full !\n");
+    }
+    else {
+        if (front == -1 )
+        {
+          front = 0 ;
+        }
+        rear =(rear + 1) % size ;
+        arr [ rear ] = element;
+        printf("inserted -> %d \n", element);
+    }
+   
+}
+int deQueue() {
+  int element;
+  if (isEmpty()){
+    printf("\n Queue is empty !! \n");
+    return (-1);
+  }
+  else {
+    element = arr[front];
+    if (front == rear) {
+      front = -1;
+      rear = -1;
+    } 
+    // Q has only one element, so we reset the 
+    // queue after dequeing it. ?
+    else {
+      front = (front + 1) % size;
+    }
+    printf("\n Deleted element -> %d \n", element);
+    return (element);
+  }
 }
 
     int main()
 {
-    struct queue q;
-    q.size=4;
-    q.f = q.r = 0;  //in circular queue always f and r star from 0
-    q.arr=(int *)malloc(q.size*sizeof(int));
+    deQueue ();  // will fail bcoz front = -1 
+    
+  enQueue(1);
+  enQueue(2);
+  enQueue(3);
+  enQueue(4);
+  enQueue(5);
 
-    enqueue(&q,10);
-    enqueue(&q,12);
-    enqueue(&q,15);
-    printf("dequeueing element %d\n",dequeue(&q));
-    printf("dequeueing element %d\n",dequeue(&q));
-    printf("dequeueing element %d\n",dequeue(&q));
-    enqueue(&q,55);
-    enqueue(&q,6);
-    enqueue(&q,25);
+  // Fails to enqueue because front == 0 && rear == SIZE - 1
+  enQueue(6);
 
-    if(isEmpty(&q))
-    {
-        printf("Queue is Empty");
-    }
-    if(isFull(&q))
-    {
-        printf("Queue is FUll");
-    }
+  display();
+  deQueue();
+  
+  display();
+
+  enQueue(7);
+  display();
+
+  // Fails to enqueue because front == rear + 1
+  enQueue(8);
+
+  return 0;
+
     return 0;
 }
