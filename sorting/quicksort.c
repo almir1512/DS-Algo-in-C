@@ -38,9 +38,9 @@ int partition(int arr[], int low, int high)
     arr[j]=temp;
     return j;   //returning j to the function 
 }
-void quicksort(int arr[], int low, int high)
+void quicksort(int arr[], int low, int high)   // using recursion
 {
-    int partitionIndex;
+    int partitionIndex; // index of pivot after partitioning 
     if(low<high){
     partitionIndex = partition(arr, low, high); //returning the value of j
     quicksort(arr, low, partitionIndex-1); // sorting left subarray
@@ -52,7 +52,7 @@ int main()
     int arr[] = {1, 268, 5, 0, 78, 56, 2};
     int n = 7;
     print(arr, n);
-    quicksort(arr, 0, n - 1);  // low = 0    high = n-1
+    quicksort(arr, 0, n - 1);  // low = 0    high = n-1 are  indexes
     printf("\n");
     print(arr, n);
     return 0;
