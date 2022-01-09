@@ -88,7 +88,7 @@ int stackBottom(struct stack *ptr)
 
     printf("After pushing : %d \n",isEmpty(sp));
     printf("After pushing : %d \n",isFull(sp));
-    // for(int j=1;j<=sp->top+1;j++)
+    // for(int j=1;j<=sp->top+1;j++)                   // to view all elements in stack
     // {
     //     printf("position %d = %d \n",j,(peek(sp,j)));
     // }
